@@ -46,5 +46,8 @@ setup(
         "memcached": [
             "pymemcached"
         ],
+        "pulsar": [
+            "pulsar-client"
+        ]
     }
 )

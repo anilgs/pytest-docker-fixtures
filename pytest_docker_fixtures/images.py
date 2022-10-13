@@ -107,6 +107,13 @@ settings = {
                 "12112": "12112",  # HTTPS
             }
         }
+    },
+    "pulsar": {
+        "image": "apachepulsar/pulsar-standalone",
+        "version": "latest",
+        "options": {
+
+        }
     }
 }
 
