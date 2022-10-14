@@ -9,6 +9,7 @@ from .containers.minio import minio_image
 from .containers.mysql import mysql_image
 from .containers.memcached import memcached_image
 from .containers.stripe import stripe_image
+from .containers.pulsar import pulsar_image
 
 import os
 import pytest
@@ -145,3 +146,19 @@ def stripe():
         host, port = stripe_image.run()
         yield host, port
         stripe_image.stop()
+
+@pytest.fixture(scope='session')
+def pulsar():
+    if os.environ.get('PULSAR'):
+        yield os.environ['PULSAR'].split(':')
+    else:
+        if IS_TRAVIS:
+            host = 'localhost'
+            port = 8080
+        else:
+            host, port = pulsar_image.run()
+
+        yield host, port
+
+        if not IS_TRAVIS:
+            pulsar_image.stop()
